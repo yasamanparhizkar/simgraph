@@ -13,3 +13,6 @@ Our model predicts the cell responses based on the input movie with up to 75% ac
 ## References
 <a id="1">[1]</a> 
 Marre O, Tkačik G, Amodei D, Schneidman E, Bialek W, Berry M. Multi-electrode array recording from salamander retinal ganglion cells. 2017. doi:10.15479/AT:ISTA:61.[Link]([https://link-url-here.org](https://research-explorer.ista.ac.at/record/5562)https://research-explorer.ista.ac.at/record/5562)
+
+
+Last Modified: 7 Jul 2023
