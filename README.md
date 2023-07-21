@@ -1,4 +1,4 @@
-# MasterThesis
+# Binary Classification via a Similarity Graph
 All code files associated with my master's thesis at York University
 
 This project implements a novel graph-based approach for video classification which provides more interpretability than state-of-the art deep learning approaches.
