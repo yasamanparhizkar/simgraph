@@ -1,10 +1,8 @@
 """
-Master branch - this file holds the newest version of the package; hence, you should always import this into your code, not any of the archive files.
-
-Merged from: my_simgraph_08.py
+Back up of my_simgraph.py
 
 Author: Yasaman
-Last modified: Sep 25, 2023
+Last modified: Oct 16, 2023
 """
 
 import numpy as np

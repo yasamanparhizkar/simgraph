@@ -148,7 +148,7 @@ def update_set(samples, data_params):
     
     return dess, lbls
 
-def random_train_val(train_num, val_num, ind_min, ind_max, data_params, seed=None):
+def random_train_val(train_num, val_num, data_params, seed=None):
     """
     Choose random datapoints to form training and validation datasets. The two sets do not overlap.
     Note: since datapoints are selected randomly, their new indices do NOT represent time anymore.
@@ -179,6 +179,8 @@ def random_train_val(train_num, val_num, ind_min, ind_max, data_params, seed=Non
         smpls - list of indices of chosen datapoints, original indices which represent time
     """
     
+    ind_min = data_params['ind_min']
+    ind_max = data_params['ind_max']
     data_num = ind_max - ind_min + 1
     train_num = min(train_num, data_num)
     val_num   = min(val_num, data_num-train_num)
