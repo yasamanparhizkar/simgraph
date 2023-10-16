@@ -35,9 +35,9 @@ def get_edges_tt(lbls, D, cnstr_method, smpl_t, seed):
 
     if D is None:
         return get_edges_tt_full(lbls)
-    elif cnstr_method == 'random-obj1':
+    elif cnstr_method == 'random-glr':
         return get_edges_tt_maxdeg(lbls, D, seed)
-    elif cnstr_method == 'time-obj1':
+    elif cnstr_method == 'time-glr':
         return get_edges_tt_time(lbls, D, smpl_t)
     elif cnstr_method == 'random-lmnn':
         return get_edges_tt_maxdeg_cheng(lbls, D, seed)
@@ -305,7 +305,7 @@ def get_edges_vt(num_val, train_y, graph_params, seed):
         return get_edges_vt_full(len(train_y), num_val)
     elif graph_params['cnstr_method_vt'] == 'random':
         return get_edges_vt_maxdeg(train_y, num_val, Dvt, seed)
-    elif graph_params['cnstr_method_vt'] == 'time_balanced':
+    elif graph_params['cnstr_method_vt'] == 'time-balanced':
         return get_edges_vt_time_balanced(train_y, num_val, Dvt, train_t, val_t)
     elif graph_params['cnstr_method_vt'] == 'time':
         return get_edges_vt_time(train_y, num_val, Dvt, train_t, val_t)
@@ -381,10 +381,21 @@ def get_edges_vt_time(train_lbls, num_val, Dvt, train_t, val_t):
     """
     Refer to documentation for 'get_edges_vt'
     """
-    #TBI
-    assert False
-    
-    return None
+    edges_vt = []
+    for i in range(num_val):
+        train_inds = np.arange(train_lbls.shape[0])
+        diff = train_t - val_t[i]
+        
+        sorted_train_nodes = sorted(list(zip(train_inds[diff < 0], diff[diff < 0])), key=lambda x: x[1], reverse=True)
+        temp = sorted_train_nodes[:Dvt//2]
+        sorted_train_nodes = sorted(list(zip(train_inds[diff >= 0], diff[diff >= 0])), key=lambda x: x[1], reverse=False)
+        temp += sorted_train_nodes[:Dvt-Dvt//2]
+        
+        for (j, t) in temp:
+            edges_vt.append((i, j))
+        
+        
+    return edges_vt
 
 def cnstr_glr(B, deriv, mu, x, F, edges_tt):
     """
