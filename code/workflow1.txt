@@ -1,0 +1,7 @@
+Last Modified: October 17, 2023
+Jupyter notebooks to run when you want to try a new grouping algorithm for the responses.
+* 05_simple_features_toy_examples/05_group_neurons.ipynb: generate the new response signal and save it on disc for further processing.
+* 14_comparison/11_glr_sdp_gdpa.ipynb: run a single training-validation round with any of the three training methods.
+* 09_sift3d/10_bglr_assess.ipynb: run randomized experiments with the B-GLR model.
+* 09_sift3d/08_visualize_sift_keypoints.ipynb: visualize the optimized M, its diagonal entries and the most contributing 3D-SIFT features.
+* 17_interpretation/02_M_eigenvectors.ipynb: visualize the optimized M's eigenvalues and eigenvectors.
