@@ -386,10 +386,31 @@ def get_edges_vt_time(train_lbls, num_val, Dvt, train_t, val_t):
         train_inds = np.arange(train_lbls.shape[0])
         diff = train_t - val_t[i]
         
+        sorted_train_nodes = sorted(list(zip(train_inds, np.abs(diff))), key=lambda x:x[1])
+        temp = sorted_train_nodes[:Dvt]
+        
+        for (j, t) in temp:
+            edges_vt.append((i, j))
+        
+        
+    return edges_vt
+
+def get_edges_vt_time_alt(train_lbls, num_val, Dvt, train_t, val_t):
+    """
+    Refer to documentation for 'get_edges_vt'
+    """
+    edges_vt = []
+    for i in range(num_val):
+        train_inds = np.arange(train_lbls.shape[0])
+        diff = train_t - val_t[i]
+        
+        num_neg = min(Dvt//2, len(diff[diff < 0]))
+        num_pos = min(Dvt - num_neg, len(diff[diff >= 0]))
+        
         sorted_train_nodes = sorted(list(zip(train_inds[diff < 0], diff[diff < 0])), key=lambda x: x[1], reverse=True)
-        temp = sorted_train_nodes[:Dvt//2]
+        temp = sorted_train_nodes[:num_neg]
         sorted_train_nodes = sorted(list(zip(train_inds[diff >= 0], diff[diff >= 0])), key=lambda x: x[1], reverse=False)
-        temp += sorted_train_nodes[:Dvt-Dvt//2]
+        temp += sorted_train_nodes[:num_pos]
         
         for (j, t) in temp:
             edges_vt.append((i, j))
