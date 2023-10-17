@@ -107,7 +107,7 @@ def take_val_step(train_data, val_num, data_params, M, sg_params, seed, show_edg
     # time0 = time.time()
     sg_params['edges_vv'] = None
     sg_params['edges_vt'] = None
-    val_acc, y_est, t = sg.get_acc(M, train_data['des'], train_data['lbls'], val_data['des'], val_data['lbls'], sg_params, seed, show_edges)
+    val_acc, y_est, t = sg.get_acc(M, train_data['des'], train_data['lbls'], val_data['des'], val_data['lbls'], sg_params, 'cat', seed, show_edges)
     # print('sg.get_acc took {} sec'.format(time.time()-time0))
 
     # compute several assessment quantities
