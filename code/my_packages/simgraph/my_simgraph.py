@@ -788,8 +788,7 @@ def get_acc(M, train_des, train_y, val_des, val_y, graph_params, threshold_func=
         y_th = (y_est > 0).astype(int) * 2 - 1
         acc = np.sum(y_th == val_y)/len(val_y)
     elif threshold_func == 'cat':
-        y_th = np.round(y_est)
-        acc = np.sum(y_th == val_y)/len(val_y)
+        acc = np.mean(np.square(y_est - val_y))
 
     return acc, y_est, t
 
