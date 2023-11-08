@@ -126,9 +126,8 @@ def test_rnn(model, n_val_batches, val_des, val_lbls, device='cpu'):
     
     return acc
 
-def assess_rnn(train_sizes, val_num, train_its, val_its, data_params, sequence_length, 
-               input_size, hidden_size, num_layers, num_classes, device, learning_rate, num_epochs,
-               show_messages=False, seed=None):
+
+def assess_rnn(train_sizes, val_num, train_its, val_its, data_params, sequence_length, input_size, hidden_size, num_layers, num_classes, device, learning_rate, num_epochs,show_messages=False, seed=None):
     
     val_acc_means = []
     val_acc_stds = []
@@ -141,24 +140,24 @@ def assess_rnn(train_sizes, val_num, train_its, val_its, data_params, sequence_l
             batch_size_train = train_num
             batch_size_val = val_num
             train_des, train_lbls, _, _, n_total_steps, _ = \
-            rnas.prepare_rnn_data(data_params, train_num, val_num, batch_size_train, batch_size_val, 
+            prepare_rnn_data(data_params, train_num, val_num, batch_size_train, batch_size_val, 
                                  sequence_length, input_size, seed)
 
             # train
-            model = rnas.train_rnn(input_size, hidden_size, num_layers, num_classes, device, learning_rate, 
+            model = train_rnn(input_size, hidden_size, num_layers, num_classes, device, learning_rate, 
                   num_epochs, n_total_steps, train_des, train_lbls, show_messages)
 
             for va_it in range(val_its):
                 # prepare the validation data
                 _, _, val_des, val_lbls, _, n_val_batches = \
-                rnas.prepare_rnn_data(data_params, train_num, val_num, batch_size_train, batch_size_val, 
+                prepare_rnn_data(data_params, train_num, val_num, batch_size_train, batch_size_val, 
                                      sequence_length, input_size, seed)
 
                 # test
-                acc = rnas.test_rnn(model, n_val_batches, val_des, val_lbls, device)
+                acc = test_rnn(model, n_val_batches, val_des, val_lbls, device)
                 it_accs.append(acc)
                 # print(f'Accuracy of the network on the test images: {acc} %')
-            print('train size: {} iteration: {}/{}'.format(train_size, tr_it+1, train_its))
+            print('train size: {} iteration: {}/{}'.format(train_num, tr_it+1, train_its))
 
         val_acc_means.append(np.mean(it_accs))
         val_acc_stds.append(np.std(it_accs))
