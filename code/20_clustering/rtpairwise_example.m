@@ -10,7 +10,7 @@ model = maxent.createModel(ncells,'rtpairwise', nrepeats, nframes);
 % train the model to a threshold of 15 standard deviations from the error of computing the marginals.
 % because the distribution is larger (113 dimensions) we cannot explicitly iterate over all 2^113 states
 % in memory and will use markov chain monte carlo (MCMC) methods to obtain an approximation
-model = maxent.trainModel(model,reshape(spikes113, ncells, []),'threshold',15, 'save_file', 'training_reentry.mat', 'max_nsamples', nan);
+model = maxent.trainModel(model,reshape(spikes113, ncells, []),'threshold',15, 'savefile', 'training_reentry.mat', 'max_nsamples', nan);
 
 % save the optimized model
 save('opt_model.mat', 'model');
