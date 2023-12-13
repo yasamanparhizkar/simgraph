@@ -18,7 +18,7 @@ model = maxent.trainModel(model,samples_train,'threshold',1.5);
 
 % get the marginals (firing rates and correlations) of the test data and see how they compare to the model predictions.
 % here the model marginals could not be computed exactly so they will be estimated using monte-carlo. We specify the
-% number of samples we use so that their estimation will have the same amoutn noise as the empirical marginal values
+% number of samples we use so that their estimation will have the same amount noise as the empirical marginal values
 marginals_data = maxent.getEmpiricalMarginals(samples_test,model);
 marginals_model = maxent.getMarginals(model,'nsamples',size(samples_test,2));
 
